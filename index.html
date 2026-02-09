@@ -128,6 +128,42 @@
         font-size: 16px;
         line-height: 1.6;
       }
+      .warning{
+        background: linear-gradient(135deg, rgba(255,170,0,.18), rgba(255,200,0,.12));
+        border: 1px solid rgba(255,170,0,.35);
+        border-radius: var(--r);
+        padding: 20px 24px;
+        margin-bottom: 32px;
+        box-shadow: 0 12px 44px rgba(255,170,0,.08);
+      }
+      .warningTitle{
+        font-family: "Rubik", ui-sans-serif, system-ui, sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        color: #ffaa00;
+        margin: 0 0 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .warningIcon{
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: rgba(255,170,0,.25);
+        border: 2px solid rgba(255,170,0,.45);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 14px;
+      }
+      .warningTxt{
+        color: rgba(234,255,241,.88);
+        font-size: 14px;
+        line-height: 1.6;
+        margin: 0;
+      }
       .card{
         background: var(--card);
         border: 1px solid rgba(28,44,35,.95);
@@ -149,18 +185,6 @@
         font-size: 14px;
         color: rgba(234,255,241,.75);
         margin-bottom: 12px;
-      }
-      .badge{
-        display:inline-block;
-        font-family: "Rubik", ui-sans-serif, system-ui, sans-serif;
-        font-weight: 700;
-        font-size: 10px;
-        color: var(--lime);
-        background: rgba(0,255,0,.14);
-        border:1px solid rgba(0,255,0,.30);
-        border-radius: 6px;
-        padding: 4px 8px;
-        margin-left: 8px;
       }
       .txt{
         color: rgba(234,255,241,.85);
@@ -227,14 +251,21 @@
           Complete documentation for all available functions in AracProtect executor.
         </p>
 
+        <div class="warning">
+          <div class="warningTitle">
+            <span class="warningIcon">!</span>
+            Security Notice
+          </div>
+          <p class="warningTxt">
+            All file-related functions operate within a sandboxed environment and cannot access files outside of the executor's sandbox directory. This ensures protection against malicious code attempting to access or modify sensitive system files.
+          </p>
+        </div>
+
         <div class="sect">
           <h2 class="sectTitle">HTTP Functions</h2>
 
           <div class="card">
-            <div class="funcTitle">
-              HttpGet
-              <span class="badge">WR</span>
-            </div>
+            <div class="funcTitle">HttpGet</div>
             <div class="sig">HttpGet(url) -> string</div>
             <p class="txt">
               Performs an HTTP GET request to the specified URL and returns the response body as a string.
@@ -244,10 +275,7 @@ print(body)</pre></div>
           </div>
 
           <div class="card">
-            <div class="funcTitle">
-              HttpPost
-              <span class="badge">WR</span>
-            </div>
+            <div class="funcTitle">HttpPost</div>
             <div class="sig">HttpPost(url, body?, userAgent?, timeoutMs?) -> string</div>
             <p class="txt">
               Performs an HTTP POST request to the specified URL with optional body, user agent, and timeout.
@@ -267,10 +295,7 @@ print(resp2)</pre></div>
           <h2 class="sectTitle">File System Functions</h2>
 
           <div class="card">
-            <div class="funcTitle">
-              writefile
-              <span class="badge">NWR</span>
-            </div>
+            <div class="funcTitle">writefile</div>
             <div class="sig">writefile(filename, content)</div>
             <p class="txt">
               Writes content to a file within the AracFiles sandbox.
@@ -278,14 +303,11 @@ print(resp2)</pre></div>
             <p class="note">
               Only writes within the AracFiles sandbox directory.
             </p>
-            <div class="code"><pre>writefile("demo/hello.txt", "linha1\nlinha2")</pre></div>
+            <div class="code"><pre>writefile("demo/hello.txt", "line1\nline2")</pre></div>
           </div>
 
           <div class="card">
-            <div class="funcTitle">
-              readfile
-              <span class="badge">WR</span>
-            </div>
+            <div class="funcTitle">readfile</div>
             <div class="sig">readfile(path) -> string</div>
             <p class="txt">
               Reads and returns the content of a file as a string.
@@ -295,10 +317,7 @@ print("content:", c)</pre></div>
           </div>
 
           <div class="card">
-            <div class="funcTitle">
-              makefolder
-              <span class="badge">NWR</span>
-            </div>
+            <div class="funcTitle">makefolder</div>
             <div class="sig">makefolder(path, foldername)</div>
             <p class="txt">
               Creates a new folder at the specified path.
@@ -311,10 +330,7 @@ makefolder("demo", "sub")</pre></div>
           </div>
 
           <div class="card">
-            <div class="funcTitle">
-              getfiles
-              <span class="badge">WR</span>
-            </div>
+            <div class="funcTitle">getfiles</div>
             <div class="sig">getfiles(path) -> string</div>
             <p class="txt">
               Returns a list of files and folders at the specified path.
@@ -327,10 +343,7 @@ print(getfiles("demo"))   -- inside demo</pre></div>
           </div>
 
           <div class="card">
-            <div class="funcTitle">
-              delfile
-              <span class="badge">NWR</span>
-            </div>
+            <div class="funcTitle">delfile</div>
             <div class="sig">delfile(path)</div>
             <p class="txt">
               Deletes the file at the specified path.
@@ -339,10 +352,7 @@ print(getfiles("demo"))   -- inside demo</pre></div>
           </div>
 
           <div class="card">
-            <div class="funcTitle">
-              delfolder
-              <span class="badge">NWR</span>
-            </div>
+            <div class="funcTitle">delfolder</div>
             <div class="sig">delfolder(path)</div>
             <p class="txt">
               Deletes the folder at the specified path.
